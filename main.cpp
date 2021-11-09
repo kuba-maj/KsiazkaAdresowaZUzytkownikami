@@ -3,6 +3,12 @@
 
 using namespace std;
 
+struct Uzytkownik
+{
+    int id;
+    string nazwa, haslo;
+};
+
 int main()
 {
     cout << "Hello world!" << endl;
