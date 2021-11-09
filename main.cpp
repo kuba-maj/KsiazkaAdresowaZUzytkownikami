@@ -9,6 +9,35 @@ struct Uzytkownik
     string nazwa, haslo;
 };
 
+void rejestracja(vector <Adresat> &adresaci)
+{
+    string nazwa, haslo;
+    cout << "Podaj nazwe uzytkownika: ";
+    cin >> nazwa;
+    int i = 0;
+    while(i < usersCount)
+    {
+        if (users[i].nazwa == nazwa)
+        {
+            cout << "Taki uzytkownik istnieje. Wpisz inna nazwe uzytkownika: ";
+            cin >> nazwa;
+            i = 0;
+        }
+        else
+        {
+            i++;
+        }
+    }
+    cout << "Podaj haslo: ";
+    cin >> haslo;
+    users[usersCount].nazwa = nazwa;
+    users[usersCount].haslo = haslo;
+    users[usersCount].id = usersCount+1;
+    cout << "Konto zalozone" << endl;
+    Sleep(1000);
+    return usersCount + 1;
+}
+
 int main()
 {
     vector <Adresat> adresaci;
