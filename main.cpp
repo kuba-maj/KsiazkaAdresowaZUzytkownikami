@@ -1,12 +1,13 @@
 #include <iostream>
 #include <windows.h>
+#include <cstdlib>
 #include <vector>
 
 using namespace std;
 
 struct Uzytkownik {
-    int id;
-    string nazwa, haslo;
+    int id = 0;
+    string nazwa = "", haslo = "";
 };
 
 struct Adresat {
@@ -14,39 +15,38 @@ struct Adresat {
     string imie = "", nazwisko = "", numerTelefonu = "", email = "", adres = "";
 };
 
-void rejestracja(vector <Uzytkownik> uzytkownicy) {
+void rejestracja(vector <Uzytkownik> &uzytkownicy) {
     Uzytkownik uzytkownik;
     int id = 0;
-    string nazwa, haslo;
-        if (uzytkownicy.size() == 0) {
-        id = 1;
-    } else {
-        id = uzytkownicy[uzytkownicy.size() - 1].id + 1;
-    }
+    string nazwaUzytkownika, haslo, nazwa;
+    int iloscAdresatow = 0;
+    system("cls");
     cout << "Podaj nazwe uzytkownika: ";
-    cin >> nazwa;
-    int i = 0;
-    while(i < uzytkownicy.size()) {
-        if (uzytkownicy[i].nazwa == nazwa) {
+    cin >> nazwaUzytkownika;
+    cout << uzytkownicy.size() << endl;
+    while (iloscAdresatow < uzytkownicy.size())  {
+        if (uzytkownicy[iloscAdresatow].nazwa == nazwaUzytkownika) {
             cout << "Taki uzytkownik istnieje. Wpisz inna nazwe uzytkownika: ";
-            cin >> nazwa;
-            i = 0;
+            cin >> nazwaUzytkownika;
+            iloscAdresatow = 0;
+
         } else {
-            i++;
+            iloscAdresatow++;
         }
     }
     cout << "Podaj haslo: ";
     cin >> haslo;
-    uzytkownik.nazwa = nazwa;
+    uzytkownik.nazwa = nazwaUzytkownika;
     uzytkownik.haslo = haslo;
     uzytkownik.id = id;
     uzytkownicy.push_back(uzytkownik);
     cout << "Konto zalozone" << endl;
+
     Sleep(1000);
 }
 
 int main() {
-    vector <Adresat> adresaci;
+    //vector <Adresat> adresaci;
     vector <Uzytkownik> uzytkownicy;
     int idZalogowanegoUzytkownika = 0;
     int iloscUzytkownikow = 0;
