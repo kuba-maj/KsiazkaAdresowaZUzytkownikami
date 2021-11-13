@@ -21,9 +21,13 @@ void rejestracja(vector <Uzytkownik> &uzytkownicy) {
     string nazwaUzytkownika, haslo, nazwa;
     int iloscAdresatow = 0;
     system("cls");
+    if (uzytkownicy.empty() == true) {
+        uzytkownik.id = 1;
+    } else {
+        uzytkownik.id = uzytkownicy.back().id + 1;
+    }
     cout << "Podaj nazwe uzytkownika: ";
     cin >> nazwaUzytkownika;
-    cout << uzytkownicy.size() << endl;
     while (iloscAdresatow < uzytkownicy.size())  {
         if (uzytkownicy[iloscAdresatow].nazwa == nazwaUzytkownika) {
             cout << "Taki uzytkownik istnieje. Wpisz inna nazwe uzytkownika: ";
@@ -38,11 +42,37 @@ void rejestracja(vector <Uzytkownik> &uzytkownicy) {
     cin >> haslo;
     uzytkownik.nazwa = nazwaUzytkownika;
     uzytkownik.haslo = haslo;
-    uzytkownik.id = id;
     uzytkownicy.push_back(uzytkownik);
     cout << "Konto zalozone" << endl;
-
     Sleep(1000);
+}
+
+int logowanie(vector <Uzytkownik> &uzytkownicy) {
+    string nazwaUzytkownika, hasloUzytkownika;
+    int iloscAdresatow = 0;
+    system("cls");
+    cout << "Podaj login: ";
+    cin >> nazwaUzytkownika;
+    while(iloscAdresatow < uzytkownicy.size()) {
+        if (uzytkownicy[iloscAdresatow].nazwa == nazwaUzytkownika) {
+            for (int proby = 0; proby < 3; proby++) {
+                cout << "Podaj haslo. Pozostalo prob " << 3 - proby << " : ";
+                cin >> hasloUzytkownika;
+                if (uzytkownicy[iloscAdresatow].haslo == hasloUzytkownika) {
+                    cout << "Zalogowales sie" << endl;
+                    Sleep(1000);
+                    return uzytkownicy[iloscAdresatow].id;
+                }
+            }
+            cout << "Podales 3 razy bledne haslo. Poczekaj 3 sekundy przed kolejna proba" << endl;
+            Sleep(3000);
+            return 0;
+        }
+        iloscAdresatow++;
+    }
+    cout << "Nie ma uzytkownika z takim loginem" << endl;
+    Sleep(1500);
+    return 0;
 }
 
 int main() {
@@ -62,9 +92,24 @@ int main() {
             if (wybor == '1') {
                 rejestracja(uzytkownicy);
             } else if (wybor == '2') {
-                ;//idZalogowanegoUzytkownika = logowanie(adresaci);
+                idZalogowanegoUzytkownika = logowanie(uzytkownicy);
             } else if (wybor == '9') {
                 exit(0);
+            }
+        }
+        else
+        {
+            system("cls");
+            cout << "1. Zmiana hasla" << endl;
+            cout << "2. Wylogowanie" << endl;
+            cin >> wybor;
+            if (wybor == '1')
+            {
+                ;//zmianaHasla(uzytkownicy, iloscUzytkownikow, idZalogowanegoUzytkownika);
+            }
+            else if (wybor == '2')
+            {
+                idZalogowanegoUzytkownika = 0;
             }
         }
 
