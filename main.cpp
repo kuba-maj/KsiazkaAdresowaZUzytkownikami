@@ -96,19 +96,14 @@ int main() {
             } else if (wybor == '9') {
                 exit(0);
             }
-        }
-        else
-        {
+        } else {
             system("cls");
             cout << "1. Zmiana hasla" << endl;
             cout << "2. Wylogowanie" << endl;
             cin >> wybor;
-            if (wybor == '1')
-            {
+            if (wybor == '1') {
                 ;//zmianaHasla(uzytkownicy, iloscUzytkownikow, idZalogowanegoUzytkownika);
-            }
-            else if (wybor == '2')
-            {
+            } else if (wybor == '2') {
                 idZalogowanegoUzytkownika = 0;
             }
         }
